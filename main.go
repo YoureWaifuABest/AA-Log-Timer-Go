@@ -23,15 +23,23 @@ type Logs struct {
 	BelowCastle string
 }
 
+var logTemplate = template.Must(template.ParseFiles("logs.html"))
+
 func logsHandler(w http.ResponseWriter, r *http.Request) {
 	var p Logs
+	var err error
 
-	p.Nui, _         = client.Get("nui").Result()
+	p.Nui, err       = client.Get("nui").Result()
+	if err != nil {
+		fmt.Println(err)
+	}
 	p.Forest, _      = client.Get("forest").Result()
 	p.AboveCastle, _ = client.Get("aboveCastle").Result()
  	p.BelowCastle, _ = client.Get("belowCastle").Result()
-	t, _ := template.ParseFiles("logs.html")
-	t.Execute(w, p)
+	err = logTemplate.Execute(w, p)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func nuiHandler(w http.ResponseWriter, r *http.Request) {
