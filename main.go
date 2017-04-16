@@ -102,6 +102,7 @@ func main() {
 	http.HandleFunc("/foresttimer/", forestHandler)
 	http.HandleFunc("/abovetimer/", aboveHandler)
 	http.HandleFunc("/belowtimer/", belowHandler)
+	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("/scripts/"))))
 	go countDown("nui")
 	go countDown("forest")
 	go countDown("aboveCastle")
