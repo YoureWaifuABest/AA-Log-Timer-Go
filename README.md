@@ -3,7 +3,9 @@ Simple Archeage timer for logs in Calmlands. Uses Go + Redis
 
 ## Requirements
 go compiler
+
 redis
+
 go-redis
 
 ## compiling
