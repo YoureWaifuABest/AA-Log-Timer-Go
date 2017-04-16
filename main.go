@@ -74,7 +74,10 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 		;
 	}
 	val := r.FormValue(key)
-	newVal, _ := strconv.Atoi(val)
+	newVal, err := strconv.Atoi(val)
+	if err != nil {
+		return
+	}
 	if newVal == 0 {
 		http.Redirect(w, r, "/logs/", http.StatusFound)	
 		return
@@ -95,5 +98,5 @@ func main() {
 	go countDown("forest")
 	go countDown("aboveCastle")
 	go countDown("belowCastle")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":80", nil))
 }

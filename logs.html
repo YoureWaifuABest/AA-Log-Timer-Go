@@ -30,7 +30,7 @@
 	<details id="nuied">
 		<summary>[edit]</summary>
 		<span>
-			<input type="text" name="nui" placeholder="Time in minutes" />
+			<input type="text" name="nui" placeholder="Time in minutes" pattern="[1-9]{1,2}" title="Integer, 1-2 digits" />
 			<input type="submit" value="Save">
 		</span>
 	</details>
@@ -42,7 +42,7 @@
 	<details id="forested">
 		<summary>[edit]</summary>
 		<span>
-			<input type="text" name="forest" placeholder="Time in minutes" />
+			<input type="text" name="forest" placeholder="Time in minutes" pattern="[1-9]{1,2}" title="Integer, 1-2 digits" />
 			<input type="submit" value="Save">
 		</span>
 	</details>
@@ -54,7 +54,7 @@
 	<details id="atced">
 		<summary>[edit]</summary>
 		<span>
-			<input type="text" name="aboveCastle" placeholder="Time in minutes" />
+			<input type="text" name="aboveCastle" placeholder="Time in minutes" pattern="[1-9]{1,2}" title="Integer, 1-2 digits" />
 			<input type="submit" value="Save">
 		</span>
 	</details>
@@ -66,13 +66,15 @@
 	<details id="btced">
 		<summary>[edit]</summary>
 		<span>
-			<input type="text" name="belowCastle" placeholder="Time in minutes" />
+			<input type="text" name="belowCastle" placeholder="Time in minutes" pattern="[1-9]{1,2}" title="Integer, 1-2 digits" />
 			<input type="submit" value="Save">
 		</span>
 	</details>
 </form>
 
-<div class="bottom-right">Source: </div>
+<div class="bottom-right">
+	Source: <a href="https://github.com/YoureWaifuABest/AA-Log-Timer-Go">https://github.com/YoureWaifuABest/AA-Log-Timer-Go</a>
+</div>
 
 <script>
 	function formatTime(t) {
