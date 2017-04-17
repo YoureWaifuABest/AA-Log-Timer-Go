@@ -38,6 +38,8 @@ func nuiHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
+	// Shouldn't be vulnerable to a format string attack since the input
+	// is sanitized before getting to this point, anyway
 	fmt.Fprint(w, str)
 }
 
@@ -104,6 +106,10 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 		;
 	}
 	val := r.FormValue(key)
+	// This should, as a side effect, protect against most exploits, like
+	// XSS attacks etc. since only numbers are allowed.
+	// If something like <script> is inserted, it'll just 
+	// return an error.
 	newVal, err := strconv.Atoi(val)
 	seconds := newVal*60
 	// If the value is not able to be converted to an int
