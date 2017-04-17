@@ -44,12 +44,12 @@ func forestHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func aboveHandler(w http.ResponseWriter, r *http.Request) {
-	str, _ := client.Get("aboveCastle").Result()
+	str, _ := client.Get("atc").Result()
 	fmt.Fprint(w, str)
 }
 
 func belowHandler(w http.ResponseWriter, r *http.Request) {
-	str, _ := client.Get("belowCastle").Result()
+	str, _ := client.Get("btc").Result()
 	fmt.Fprint(w, str)
 }
 
@@ -128,8 +128,8 @@ func main() {
 	// these will self-terminate if unnecessary
 	go countDown("nui")
 	go countDown("forest")
-	go countDown("aboveCastle")
-	go countDown("belowCastle")
+	go countDown("atc")
+	go countDown("btc")
 	// Start listening on port 80 (default port for http), logging
 	// Fatal errors (and closing upon error)
 	log.Fatal(http.ListenAndServe(":80", nil))
