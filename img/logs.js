@@ -38,6 +38,7 @@ function countDown() {
 		$("#nuied").css("display","none");
 	}
 	if (nui == 0) {
+		$("#nui").html(formatTime(nui));
 		$("#nuied").css("display","inline");
 	}
 	if (forest >= 1) {
@@ -46,6 +47,7 @@ function countDown() {
 		$("#forested").css("display","none");
 	}
 	if (forest == 0) {
+		$("#forest").html(formatTime(nui));
 		$("#forested").css("display","inline");
 	}
 	if (atc >= 1) {
@@ -54,6 +56,7 @@ function countDown() {
 		$("#atced").css("display","none");
 	}
 	if (atc == 0) {
+		$("#atc").html(formatTime(nui));
 		$("#atced").css("display","inline");
 	}
 	if (btc >= 1) {
@@ -62,6 +65,7 @@ function countDown() {
 		$("#btced").css("display","none");
 	}
 	if (btc == 0) {
+		$("#btc").html(formatTime(nui));
 		$("#btced").css("display","inline");
 	}
 }
