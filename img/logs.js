@@ -1,8 +1,14 @@
 function formatTime(t) {
+	// If t is greater than or equal to one hour
 	if (~~(t / 3600) > 0) {
+		// ~~ is essentially a shorthand for Math.floor()
+		// this is, essentially, time / 3600 (time in hours)
+		// rounded to the nearest whole number
 		var hour = ~~(t / 3600)
 		var min  = ~~((t % 3600) / 60)
 		var sec  = t % 60
+		// Append a 0 to the : if minutes / seconds are less than 9
+		// that way it displays as 10:09 rather than 10:9
 		return hour + (min > 9 ? ":" : ":0") + min + (sec > 9 ? ":" : ":0") + sec;
 	} else {
 		var min = ~~(t / 60)
@@ -11,16 +17,16 @@ function formatTime(t) {
 	}
 }
 
+// I would like to use something like a struct here,
+// maybe an object or something of the sort.
+// Can't be bothered right now
 var nui = 0;
 var forest = 0;
 var atc = 0
 var btc = 0
+// When the page loads
 $(document).ready(function() {
 	getFromDB();
-	$("#nui").append(nui);
-	$("#forest").append(forest);	
-	$("#atc").append(atc);
-	$("#btc").append(btc);
 	setInterval("getFromDB()", 10000);
 	setInterval("countDown()", 1000);
 });
