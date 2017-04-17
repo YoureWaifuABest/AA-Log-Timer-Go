@@ -58,7 +58,7 @@ func aboveHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func belowHandler(w http.ResponseWriter, r *http.Request) {
-	str, _ := client.Get("btc").Result()
+	str, err := client.Get("btc").Result()
 	if err != nil {
 		fmt.Println(err)
 	}
