@@ -12,3 +12,8 @@ go-redis
 go build main.go
 
 Change redis settings as necessary
+
+## running
+./main
+
+Populate redis with db entires before running
