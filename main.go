@@ -34,22 +34,34 @@ func logsHandler(w http.ResponseWriter, r *http.Request) {
 // Could at least use just 1 function.
 // Clean-up later.
 func nuiHandler(w http.ResponseWriter, r *http.Request) {
-	str, _ := client.Get("nui").Result()
+	str, err := client.Get("nui").Result()
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Fprint(w, str)
 }
 
 func forestHandler(w http.ResponseWriter, r *http.Request) {
-	str, _ := client.Get("forest").Result()
+	str, err := client.Get("forest").Result()
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Fprint(w, str)
 }
 
 func aboveHandler(w http.ResponseWriter, r *http.Request) {
-	str, _ := client.Get("atc").Result()
+	str, err := client.Get("atc").Result()
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Fprint(w, str)
 }
 
 func belowHandler(w http.ResponseWriter, r *http.Request) {
 	str, _ := client.Get("btc").Result()
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Fprint(w, str)
 }
 
