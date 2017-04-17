@@ -1,0 +1,19 @@
+summary {
+	display: inline;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+details {
+	display: inline;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.bottom-right {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}

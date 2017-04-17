@@ -115,11 +115,6 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/logs/", http.StatusFound)
 }
 
-// Serves the JS. Will be replaced if later necessary
-func sendLogsJs(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "scripts/logs.js")
-}
-
 func main() {
 	http.HandleFunc("/logs/", logsHandler)
 	http.HandleFunc("/save/", saveHandler)
@@ -127,7 +122,8 @@ func main() {
 	http.HandleFunc("/foresttimer/", forestHandler)
 	http.HandleFunc("/abovetimer/", aboveHandler)
 	http.HandleFunc("/belowtimer/", belowHandler)
-	http.HandleFunc("/scripts/logs.js", sendLogsJs)
+	// FileServer handler
+	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("./img/"))))
 	// Starts the countdown for all four functions on server start
 	// these will self-terminate if unnecessary
 	go countDown("nui")
