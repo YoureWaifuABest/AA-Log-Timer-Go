@@ -105,6 +105,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	val := r.FormValue(key)
 	newVal, err := strconv.Atoi(val)
+	seconds := newVal*60
 	// If the value is not able to be converted to an int
 	// (if it's not a number)
 	// return. 
@@ -117,6 +118,13 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 	// Should also be illegal through normal methods
 	if newVal == 0 {
 		// Redirect back to main page
+		http.Redirect(w, r, "/logs/", http.StatusFound)
+		return
+	}
+	// If value is greater than 1 hour 30 minutes,
+	// redirect and return
+	// To ensure times greater than the maximum value cannot be entered
+	if seconds > 5400 {
 		http.Redirect(w, r, "/logs/", http.StatusFound)
 		return
 	}
