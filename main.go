@@ -23,7 +23,7 @@ var logTemplate = template.Must(template.ParseFiles("logs.html"))
 // Main handler; displays web page.
 func logsHandler(w http.ResponseWriter, r *http.Request) {
 	// Execute values into template
-	err = logTemplate.Execute(w)
+	err := logTemplate.Execute(w, nil)
 	// If the server can't access the template, bail
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
