@@ -17,45 +17,13 @@ var client = redis.NewClient(&redis.Options{
           DB:       0,
 })
 
-type Logs struct {
-	Nui string
-	Forest string
-	AboveCastle string
-	BelowCastle string
-}
-
 // Load template into RAM; only one request to logs.html is necessary per server
 var logTemplate = template.Must(template.ParseFiles("logs.html"))
 
 // Main handler; displays web page.
 func logsHandler(w http.ResponseWriter, r *http.Request) {
-	var p Logs
-	var err error
-
-	// Get the value of the key nui and store it in p.Nui
-	// If there is no value, error
-	p.Nui, err = client.Get("nui").Result()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	p.Forest, err      = client.Get("forest").Result()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	p.AboveCastle, err = client.Get("aboveCastle").Result()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	p.BelowCastle, err = client.Get("belowCastle").Result()
-	if err != nil {
-		fmt.Println(err)
-	}
-
 	// Execute values into template
-	err = logTemplate.Execute(w, p)
+	err = logTemplate.Execute(w)
 	// If the server can't access the template, bail
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
