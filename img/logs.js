@@ -67,10 +67,10 @@ function getFromDB() {
 	$.post("/foresttimer", function(data, status) {
 			forest = data;
 		});
-	$.post("/abovetimer", function(data, status) {
+	$.post("/atctimer", function(data, status) {
 			atc = data;
 		});
-	$.post("/belowtimer", function(data, status) {
+	$.post("/btctimer", function(data, status) {
 			btc = data;
 		});
 }

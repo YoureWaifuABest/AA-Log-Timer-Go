@@ -49,7 +49,7 @@ func forestHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, str)
 }
 
-func aboveHandler(w http.ResponseWriter, r *http.Request) {
+func atcHandler(w http.ResponseWriter, r *http.Request) {
 	str, err := client.Get("atc").Result()
 	if err != nil {
 		fmt.Println(err)
@@ -57,7 +57,7 @@ func aboveHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, str)
 }
 
-func belowHandler(w http.ResponseWriter, r *http.Request) {
+func btcHandler(w http.ResponseWriter, r *http.Request) {
 	str, err := client.Get("btc").Result()
 	if err != nil {
 		fmt.Println(err)
@@ -132,8 +132,8 @@ func main() {
 	http.HandleFunc("/save/", saveHandler)
 	http.HandleFunc("/nuitimer/", nuiHandler)
 	http.HandleFunc("/foresttimer/", forestHandler)
-	http.HandleFunc("/abovetimer/", aboveHandler)
-	http.HandleFunc("/belowtimer/", belowHandler)
+	http.HandleFunc("/atctimer/", atcHandler)
+	http.HandleFunc("/btctimer/", btcHandler)
 	// FileServer handler
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("./img/"))))
 	// Starts the countdown for all four functions on server start
