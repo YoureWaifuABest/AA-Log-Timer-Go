@@ -7,7 +7,7 @@ function formatTime(t) {
 	} else {
 		var min = ~~(t / 60)
 		var sec = t%60
-		return min + (sec > 9 ? ":" : ":0") + sec 
+		return min + (sec > 9 ? ":" : ":0") + sec;
 	}
 }
 
@@ -19,11 +19,12 @@ $(document).ready(function() {
 	getFromDB();
 	$("#nui").append(nui);
 	$("#forest").append(forest);	
-	$("#aboveCastle").append(atc);
-	$("#belowCastle").append(btc);
+	$("#atc").append(atc);
+	$("#btc").append(btc);
 	setInterval("getFromDB()", 10000);
 	setInterval("countDown()", 1000);
 });
+
 function countDown() {
 	if (nui >= 1) {
 		nui--;
@@ -43,7 +44,7 @@ function countDown() {
 	}
 	if (atc >= 1) {
 		atc--;
-		$("#aboveCastle").html(formatTime(atc));
+		$("#atc").html(formatTime(atc));
 		$("#atced").css("display","none");
 	}
 	if (atc == 0) {
@@ -51,13 +52,14 @@ function countDown() {
 	}
 	if (btc >= 1) {
 		btc--;
-		$("#belowCastle").html(formatTime(btc));
+		$("#btc").html(formatTime(btc));
 		$("#btced").css("display","none");
 	}
 	if (btc == 0) {
 		$("#btced").css("display","inline");
 	}
 }
+
 function getFromDB() {
 	$.post("/nuitimer", function(data, status) {
 			nui = data;
