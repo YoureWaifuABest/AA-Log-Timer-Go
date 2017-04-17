@@ -95,6 +95,10 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/logs/", http.StatusFound)
 }
 
+func sendLogsJs(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "scripts/logs.js")
+}
+
 func main() {
 	http.HandleFunc("/logs/", logsHandler)
 	http.HandleFunc("/save/", saveHandler)
@@ -102,7 +106,7 @@ func main() {
 	http.HandleFunc("/foresttimer/", forestHandler)
 	http.HandleFunc("/abovetimer/", aboveHandler)
 	http.HandleFunc("/belowtimer/", belowHandler)
-	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("/scripts/"))))
+	http.HandleFunc("/scripts/logs.js", sendLogsJs)
 	go countDown("nui")
 	go countDown("forest")
 	go countDown("aboveCastle")
