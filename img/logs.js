@@ -47,7 +47,7 @@ function countDown() {
 		$("#forested").css("display","none");
 	}
 	if (forest == 0) {
-		$("#forest").html(formatTime(nui));
+		$("#forest").html(formatTime(forest));
 		$("#forested").css("display","inline");
 	}
 	if (atc >= 1) {
@@ -56,7 +56,7 @@ function countDown() {
 		$("#atced").css("display","none");
 	}
 	if (atc == 0) {
-		$("#atc").html(formatTime(nui));
+		$("#atc").html(formatTime(atc));
 		$("#atced").css("display","inline");
 	}
 	if (btc >= 1) {
@@ -65,7 +65,7 @@ function countDown() {
 		$("#btced").css("display","none");
 	}
 	if (btc == 0) {
-		$("#btc").html(formatTime(nui));
+		$("#btc").html(formatTime(btc));
 		$("#btced").css("display","inline");
 	}
 }
