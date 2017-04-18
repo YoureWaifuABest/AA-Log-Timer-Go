@@ -40,7 +40,10 @@ func nuiHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	// Shouldn't be vulnerable to a format string attack since the input
 	// is sanitized before getting to this point, anyway
-	log.Fatal(fmt.Fprint(w, str))
+	_, err = fmt.Fprint(w, str)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func forestHandler(w http.ResponseWriter, r *http.Request) {
@@ -48,7 +51,10 @@ func forestHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Fatal(fmt.Fprint(w, str))
+	_, err = fmt.Fprint(w, str)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func atcHandler(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +62,10 @@ func atcHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Fatal(fmt.Fprint(w, str))
+	_, err = fmt.Fprint(w, str)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func btcHandler(w http.ResponseWriter, r *http.Request) {
@@ -64,7 +73,10 @@ func btcHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Fatal(fmt.Fprint(w, str))
+	_, err = fmt.Fprint(w, str)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func countDown(key string) {
