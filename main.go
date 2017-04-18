@@ -36,7 +36,7 @@ func logsHandler(w http.ResponseWriter, r *http.Request) {
 func nuiHandler(w http.ResponseWriter, r *http.Request) {
 	str, err := client.Get("nui").Result()
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 	// Shouldn't be vulnerable to a format string attack since the input
 	// is sanitized before getting to this point, anyway
@@ -46,7 +46,7 @@ func nuiHandler(w http.ResponseWriter, r *http.Request) {
 func forestHandler(w http.ResponseWriter, r *http.Request) {
 	str, err := client.Get("forest").Result()
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 	fmt.Fprint(w, str)
 }
@@ -54,7 +54,7 @@ func forestHandler(w http.ResponseWriter, r *http.Request) {
 func atcHandler(w http.ResponseWriter, r *http.Request) {
 	str, err := client.Get("atc").Result()
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 	fmt.Fprint(w, str)
 }
@@ -62,7 +62,7 @@ func atcHandler(w http.ResponseWriter, r *http.Request) {
 func btcHandler(w http.ResponseWriter, r *http.Request) {
 	str, err := client.Get("btc").Result()
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 	fmt.Fprint(w, str)
 }
@@ -71,7 +71,7 @@ func countDown(key string) {
 	// Get the value of key
 	str, err := client.Get(key).Result()
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 	// Convert key's value to an integer, so it can be 
 	// decremented and compared to other ints.
@@ -88,7 +88,10 @@ func countDown(key string) {
 		// amounts of stress on server :^)
 		if val % 5 == 0 || val == 0 {
 			// Error value is ignored for now.
-			client.Set(key, val, 0).Err()
+			err := client.Set(key, val, 0).Err()
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 		// Slightly inaccurate if I remember correctly
 		// For our purposes, should work fine
@@ -99,7 +102,10 @@ func countDown(key string) {
 
 func saveHandler(w http.ResponseWriter, r *http.Request) {
 	// Initializes r to be parsed
-	r.ParseForm()
+	err := r.ParseForm()
+	if err != nil {
+		log.Fatal(err)
+	}
 	var key string
 	// There has to be a better way
 	for key, _ = range r.Form {
@@ -135,7 +141,10 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Save the value in the database, converting minutes to seconds
-	client.Set(key, (newVal*60), 0).Err()
+	err = client.Set(key, (newVal*60), 0).Err()
+	if err != nil {
+		log.Fatal(err)
+	}
 	// Start countdown for newly saved value
 	go countDown(key)
 	http.Redirect(w, r, "/logs/", http.StatusFound)
