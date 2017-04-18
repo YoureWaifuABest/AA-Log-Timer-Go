@@ -108,7 +108,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	var key string
 	// There has to be a better way
-	for key, _ = range r.Form {
+	for key = range r.Form {
 		;
 	}
 	val := r.FormValue(key)
@@ -124,6 +124,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 	// Error is already handed client side; anyone entering
 	// invalid input is bypassing said error
 	if err != nil {
+		http.Redirect(w, r, "/logs/", http.StatusFound)
 		return
 	}
 	// If no value is entered
