@@ -33,6 +33,10 @@ func logsHandler(w http.ResponseWriter, r *http.Request) {
 // I don't like that there are four handlers doing essentially the same thing;
 // Could at least use just 1 function.
 // Clean-up later.
+// Something like:
+// func xxxxxxHandler(w http.ResponseWriter, r *http.Request) {
+// str, err := client.Get(key).Result()
+// etc.
 func nuiHandler(w http.ResponseWriter, r *http.Request) {
 	str, err := client.Get("nui").Result()
 	if err != nil {
