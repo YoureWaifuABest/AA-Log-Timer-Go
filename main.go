@@ -128,10 +128,24 @@ func countDown(key string) {
 }
 
 func brazierCDHandler(w http.ResponseWriter, r *http.Request) {
+	str, err := client.Get("brazier").Result()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	val, err := strconv.Atoi(str)
+	if err != nil {
+		http.Redirect(w, r, "/logs/", http.StatusFound)	
+		return
+	}
+	if val != 0 {
+		http.Redirect(w, r, "/logs/", http.StatusFound)
+		return
+	}
 	// 8 hours, the time it takes for a brazier to finish
-	val := 28800
+	val = 28800
 	// Save the value in the database, converting minutes to seconds
-	err := client.Set("brazier", val, 0).Err()
+	err = client.Set("brazier", val, 0).Err()
 	if err != nil {
 		log.Fatal(err)
 	}
