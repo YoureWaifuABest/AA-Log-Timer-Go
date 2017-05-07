@@ -79,6 +79,17 @@ func btcHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func brazierHandler(w http.ResponseWriter, r *http.Request) {
+	str. err := client.Get("brazier").Result()
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = fmt.Fprint(w, str)
+	if err ! nil {
+		log.Fatal(err)
+	}
+}
+
 func countDown(key string) {
 	// Get the value of key
 	str, err := client.Get(key).Result()
@@ -170,6 +181,7 @@ func main() {
 	http.HandleFunc("/foresttimer/", forestHandler)
 	http.HandleFunc("/atctimer/", atcHandler)
 	http.HandleFunc("/btctimer/", btcHandler)
+	http.HandleFunc("/braziertimer/", brazierHandler)
 	// FileServer handler
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("./img/"))))
 	// Starts the countdown for all four functions on server start
@@ -178,6 +190,7 @@ func main() {
 	go countDown("forest")
 	go countDown("atc")
 	go countDown("btc")
+	go countDown("brazier")
 	// Start listening on port 80 (default port for http), logging
 	// Fatal errors (and closing upon error)
 	log.Fatal(http.ListenAndServe(":80", nil))

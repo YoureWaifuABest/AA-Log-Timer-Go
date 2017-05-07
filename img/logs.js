@@ -24,14 +24,19 @@ var nui = 0;
 var forest = 0;
 var atc = 0
 var btc = 0
+var brazier = 0;
 // When the page loads
 $(document).ready(function() {
-	getFromDB();
-	setInterval("getFromDB()", 10000);
+	getTimers();
+	// Sync timers with db every 10 seconds to make sure 
+	// values haven't deviated
+	setInterval("getTimers()", 10000);
+	// Decrement timer every 1 second
 	setInterval("countDown()", 1000);
 });
 
 function countDown() {
+	// Tons of if statements like this rub me the wrong way
 	if (nui >= 1) {
 		nui--;
 		$("#nui").html(formatTime(nui));
@@ -68,19 +73,34 @@ function countDown() {
 		$("#btc").html(formatTime(btc));
 		$("#btced").css("display","inline");
 	}
+	if (brazier >= 1) {
+		brazier--;
+		$("#lit").html("Lit");
+		$("#bcd").html(formatTime(brazier));
+		$("#bcd").css("display","inline");
+	}
+	if (brazier == 0) {
+		$("#lit").html("Not lit!");
+		$("bcd").css("display","none");
+	}
 }
 
-function getFromDB() {
+// There's a better way to do this
+function getTimers() {
 	$.post("/nuitimer", function(data, status) {
-			nui = data;
-		});
+		nui = data;
+	});
 	$.post("/foresttimer", function(data, status) {
-			forest = data;
-		});
+		forest = data;
+	});
 	$.post("/atctimer", function(data, status) {
-			atc = data;
-		});
+		atc = data;
+	});
 	$.post("/btctimer", function(data, status) {
-			btc = data;
-		});
+		btc = data;
+	});
+	$.post("/braziertimer", function(data, status) {
+		brazier = data;
+	});
 }
+
