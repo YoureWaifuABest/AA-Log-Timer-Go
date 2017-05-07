@@ -74,8 +74,10 @@ function countDown() {
 		$("#btced").css("display","inline");
 	}
 	if (brazier >= 1) {
+		var d = new Date();
+		d.setTime(d.getTime() - ((28800 - brazier) * 1000));
 		brazier--;
-		$("#lit").html("Lit");
+		$("#lit").html("Lit on " + d.toLocaleString());
 		$("#bcd").html(formatTime(brazier));
 		$("#bcd").css("display","block");
 		$("#bri").css("display","none");
