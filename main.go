@@ -84,12 +84,12 @@ func btcHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func brazierHandler(w http.ResponseWriter, r *http.Request) {
-	str. err := client.Get("brazier").Result()
+	str, err := client.Get("brazier").Result()
 	if err != nil {
 		log.Fatal(err)
 	}
 	_, err = fmt.Fprint(w, str)
-	if err ! nil {
+	if err != nil {
 		log.Fatal(err)
 	}
 }
