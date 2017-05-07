@@ -81,7 +81,7 @@ function countDown() {
 	}
 	if (brazier == 0) {
 		$("#lit").html("Not lit!");
-		$("bcd").css("display","none");
+		$("#bcd").css("display","none");
 	}
 }
 

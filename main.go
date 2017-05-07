@@ -127,6 +127,19 @@ func countDown(key string) {
 	return
 }
 
+func brazierCDHandler(w http.ResponseWriter, r *http.Request) {
+	// 8 hours, the time it takes for a brazier to finish
+	val := 28800
+	// Save the value in the database, converting minutes to seconds
+	err := client.Set("brazier", val, 0).Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Start countdown for newly saved value
+	go countDown("brazier")
+	http.Redirect(w, r, "/logs/", http.StatusFound)
+}
+
 func saveHandler(w http.ResponseWriter, r *http.Request) {
 	// Initializes r to be parsed
 	err := r.ParseForm()
@@ -186,6 +199,7 @@ func main() {
 	http.HandleFunc("/atctimer/", atcHandler)
 	http.HandleFunc("/btctimer/", btcHandler)
 	http.HandleFunc("/braziertimer/", brazierHandler)
+	http.HandleFunc("/brazierStart/", brazierCDHandler)
 	// FileServer handler
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("./img/"))))
 	// Starts the countdown for all four functions on server start
