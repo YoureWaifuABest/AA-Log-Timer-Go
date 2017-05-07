@@ -17,3 +17,7 @@ details {
 	bottom: 0;
 	right: 0;
 }
+
+#bcd {
+	display: block;
+}

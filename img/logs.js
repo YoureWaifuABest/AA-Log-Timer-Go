@@ -77,10 +77,12 @@ function countDown() {
 		brazier--;
 		$("#lit").html("Lit");
 		$("#bcd").html(formatTime(brazier));
-		$("#bcd").css("display","inline");
+		$("#bcd").css("display","block");
+		$("#bri").css("display","none");
 	}
 	if (brazier == 0) {
 		$("#lit").html("Not lit!");
+		$("#bri").css("display","block");
 		$("#bcd").css("display","none");
 	}
 }
