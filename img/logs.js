@@ -74,6 +74,11 @@ function countDown() {
 		$("#btced").css("display","inline");
 	}
 	if (brazier >= 1) {
+		/* 
+		 * Timer will be inaccurate if there is any server downtime
+		 * Could just store timer with a timestamp, but that makes too much
+		 * sense
+		 */
 		var d = new Date();
 		d.setTime(d.getTime() - ((28800 - brazier) * 1000));
 		brazier--;
