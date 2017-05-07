@@ -11,6 +11,7 @@
 	</head>
 	
 	<body>
+		{{template "nav.html" .}}
 		<h1>Logs</h1>
 		<div>Values can't be changed once entered</div>
 		
@@ -70,10 +71,8 @@
 				<input id="bri" type="submit" value="Start Countdown">
 			</form>
 		</div>
-		
 
-		<div class="bottom-right">
-		Source: <a href="https://github.com/YoureWaifuABest/AA-Log-Timer-Go">https://github.com/YoureWaifuABest/AA-Log-Timer-Go</a>
-		</div>
+		{{template "footer.html" .}}
+
 	</body>
 </html>
