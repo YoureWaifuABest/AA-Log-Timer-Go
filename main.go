@@ -20,7 +20,7 @@ var client = redis.NewClient(&redis.Options{
 // Load template into RAM; only one request to logs.html is necessary per server
 var logTemplate = template.Must(template.ParseFiles("logs.html", "nav.html", "footer.html"))
 
-// Main handler; displays web page.
+// Main log handler; displays web page.
 func logsHandler(w http.ResponseWriter, r *http.Request) {
 	// Execute values into template
 	err := logTemplate.Execute(w, nil)
